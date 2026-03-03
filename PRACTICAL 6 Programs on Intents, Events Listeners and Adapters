@@ -1,0 +1,59 @@
+Right click on app-> New-> Activity Name: MainScreen activity_main.xml
+Change the layout to LinearLayout set orientation to horizontal
+Add two LinearLayout(vertical) to it
+In the first LinearLayout(vertical) add three TextViews and set their properties as below :-
+text: Login Id
+text: Password
+text: Gender
+In the second LinearLayout(vertical) add one Plain Text, a Password box and a Button
+and set their properties as below :-
+Plain Text (Edit Text) ID: edtLoginld
+inputType: textPersonName
+Password (Edit Text)
+ID: edtPassword inputType: textPassword
+Button:
+ID: btnLogin
+Text: Login
+onClick: goToMainScreen
+
+MainActivity.kt
+
+package com.example.bmm.typractical7
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity import android.os.Bundle impor
+android.view.View
+import kotlinx.android.synthetic.main.activity_main .*
+
+class MainActivity : AppCompatActivity() {
+override fun onCreate(savedInstanceState: Bundle?) {
+super.onCreate(savedInstanceState)
+setContentView(R.layout.activity_main)
+}
+fun goToMainScreen(v: View){
+var loginid= edtLoginlD.text.toString()
+var title=""
+var i = Intent(applicationContext, mainScreen :: class.java)
+val selectedld = rdgGender.checkedRadioButtonld
+var selectedRadioButton = findViewByld<RadioButton>(selectedld)
+if (selectedRadioButton.text.toString() == "Male")
+title="Mr."
+else
+title="Ms."
+i.putExtra("LoginName",loginid)
+i.putExtra("Title",title)
+startActivity(i)
+}
+}
+MainScreen.kt
+package com.example.bmm.typractical7
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main_screen .*
+class MainScreen : AppCompatActivity() {
+override fun onCreate(savedInstanceState: Bundle?) {
+super.onCreate(savedInstanceState)
+setContentView(R.layout.activity_main_screen)
+txtHello.setText("Hello" + intent.getStringExtra ("Title")+""
+intent.getStringExtra ("LoginName"))
+}
+}
